@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace YariazenCore.Framework
@@ -8,11 +9,13 @@ namespace YariazenCore.Framework
     {
         private static Action<string> Log;
         private static Action<string> Error;
+
         internal static void Initialize(Action<string> log, Action<string> error)
         {
             Log = log;
             Error = error;
         }
+
         internal static void InvokeEvent(string name, IEnumerable<Delegate> handlers, object sender)
         {
             if (handlers == null)
