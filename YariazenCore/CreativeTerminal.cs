@@ -3,26 +3,28 @@ using KitchenData;
 using KitchenLib.Customs;
 using KitchenLib.Utils;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using YariazenCore.Framework;
 
 namespace YariazenCore
 {
     internal class CreativeTerminal : CustomAppliance
-    {
-        public override string Name
-        {
-            get { return "Creative Appliance"; }
-        }
+	{
+		public override string Name
+		{
+			get { return "Creative Appliance"; }
+		}
 
-        public override string Description
-        {
-            get { return "It's an appliance for testing things"; }
-        }
-        public override GameObject Prefab
-        {
-            get { return (GameObject)Mod.bundle.LoadAsset("Creative Terminal"); }
-        }
+		public override string Description
+		{
+			get { return "It's an appliance for testing things"; }
+		}
+		public override GameObject Prefab
+		{
+			get { return Mod.gamedata.Get<Appliance>().FirstOrDefault(a => a.ID == -1610332021).Prefab; }
+		}
 
 		public override void OnRegister(Appliance appliance)
         {
@@ -93,9 +95,6 @@ namespace YariazenCore
 
 		public override bool PreInteract(InteractionData data, bool isSecondary = false)
 		{
-			//CItemProvider provider = EntityUtils.GetEntityManager().GetComponentData<CItemProvider>(data.Target);
-			//provider.SetAsItem(-1921097327);
-
 			return false;
 		}
 

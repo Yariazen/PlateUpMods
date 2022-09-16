@@ -4,7 +4,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(os)=='Windows_NT'">
-		<PlateUpGameFolder>D:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp</PlateUpGameFolder>
+		<PlateUpGameFolder>D:\Program Files (x86)\Steam\steamapps\common\PlateUp(Modded)\PlateUp</PlateUpGameFolder>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="$(os)=='UNIX'">
@@ -15,6 +15,9 @@
 		<Reference Include="KitchenLib">
 			<HintPath>$(PlateUpGameFolder)\Mods\KitchenLib.dll</HintPath>
 		</Reference>
+		<Reference Include="Controllers">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Controllers.dll</HintPath>
+		</Reference>
 		<Reference Include="MelonLoader">
 			<HintPath>$(PlateUpGameFolder)\MelonLoader\MelonLoader.dll</HintPath>
 		</Reference>
@@ -24,8 +27,17 @@
 		<Reference Include="Kitchen">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.Common.dll</HintPath>
 		</Reference>
+		<Reference Include="KitchenMode">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\KitchenMode.dll</HintPath>
+		</Reference>
+		<Reference Include="Kitchen.FranchiseMode">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.FranchiseMode.dll</HintPath>
+		</Reference>
 		<Reference Include="Kitchen.GameData">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.GameData.dll</HintPath>
+		</Reference>
+		<Reference Include="Kitchen.RestaurantMode">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.RestaurantMode.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.dll</HintPath>
@@ -33,14 +45,26 @@
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 		</Reference>
-		<Reference Include="Unity.TextMeshPro">
-			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+		<Reference Include="Unity.Serialization">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.Serialization.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity.Entities">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.Entities.dll</HintPath>
 		</Reference>
+		<Reference Include="Unity.Mathematics">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.Mathematics.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
 		<Reference Include="UnityEngine.UI">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="Sirenix.Serialization">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Sirenix.Serialization.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
 		</Reference>
 		<Reference Include="UnityEngine.AssetBundleModule">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
