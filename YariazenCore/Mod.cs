@@ -3,12 +3,13 @@ using KitchenData;
 using YariazenCore.Framework;
 using KitchenLib.Customs;
 using YariazenCore.Framework.Events;
-
+using Kitchen;
 namespace YariazenCore
 {
     public class Mod : YariazenMod
     {
         public CustomAppliance d;
+        public int CreativeTerminalID;
         public static GameData gamedata;
 
         public Mod() : base("Yariazen.YariazenCore", ">=1.0.0", new[] { "KitchenLib" })
@@ -30,6 +31,11 @@ namespace YariazenCore
                     new HarmonyMethod(
                         typeof(YariazenPatch).GetMethod(nameof(YariazenPatch.Postfix_GameDataConstructor_BuildGameData)),
                         priority: HarmonyLib.Priority.First)
+            );
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ProvideStartingEnvelopes), "OnUpdate"),
+                postfix: new HarmonyMethod(typeof(YariazenPatch), nameof(YariazenPatch.Postfix_ProvideStartingEnvelopes_OnUpdate))
             );
         }
 

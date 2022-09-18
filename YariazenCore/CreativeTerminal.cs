@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using YariazenCore.Framework;
 
 namespace YariazenCore
 {
@@ -35,10 +34,12 @@ namespace YariazenCore
             MaterialUtils.ApplyMaterial(appliance.Prefab, "OrderMachine/Cube/Star", new Material[] { MaterialUtils.GetExistingMaterial("Plastic - Black") });
             MaterialUtils.ApplyMaterial(appliance.Prefab, "OrderMachine/Cube/Star1", new Material[] { MaterialUtils.GetExistingMaterial("Plastic - Black") });
         }
+
 		private static TextMeshPro text;
 		static Dictionary<int, string> appliances;
 		static List<int> keys;
 		static int counter = -1;
+
 		public override bool PreRotate(InteractionData data, bool isSecondary)
 		{
 			if (isSecondary)
@@ -51,7 +52,7 @@ namespace YariazenCore
 				{
 					GameObject uiContainer = GameObject.Find("UI Container");
 					GameObject versionDisplay = GameObject.Find("Version Display(Clone)");
-					GameObject counterText = UnityEngine.Object.Instantiate(versionDisplay, versionDisplay.transform.position, versionDisplay.transform.rotation);
+					GameObject counterText = Object.Instantiate(versionDisplay, versionDisplay.transform.position, versionDisplay.transform.rotation);
 					counterText.transform.parent = uiContainer.transform;
 					counterText.name = "Counter Text";
 					counterText.transform.localPosition = new Vector3(counterText.transform.localPosition.x, counterText.transform.localPosition.y + 1, counterText.transform.localPosition.z);
