@@ -1,0 +1,3 @@
+[submodule "KitchenLib"]
+	path = KitchenLib
+	url = https://github.com/Yariazen/KitchenLib.git
