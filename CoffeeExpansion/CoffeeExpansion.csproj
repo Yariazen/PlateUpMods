@@ -33,6 +33,28 @@
 		<Reference Include="Sirenix.Serialization">
 			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Sirenix.Serialization.dll</HintPath>
 		</Reference>
+
+		<Reference Include="Unity.Entities">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.Entities.dll</HintPath>
+		</Reference>
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.UI.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+		</Reference>
+		<Reference Include="Kitchen">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="Kitchen.RestaurantMode">
+			<HintPath>$(PlateUpGameFolder)\PlateUp_Data\Managed\Kitchen.RestaurantMode.dll</HintPath>
+		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>$(PlateUpGameFolder)\MelonLoader\0Harmony.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 	<Target Name="CopyToPlateUp" AfterTargets="Build">

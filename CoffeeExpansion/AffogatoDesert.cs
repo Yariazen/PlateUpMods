@@ -13,7 +13,7 @@ namespace CoffeeExpansion
     internal class AffogatoDessert : CustomDish
     {
         public override DishType Type => DishType.Dessert;
-        public override GameObject IconPrefab => (GameObject)Mod.bundle.LoadAsset("Affogato");
+        public override GameObject IconPrefab => (GameObject)Mod.assetbundle.LoadAsset("Affogato");
         public override List<Dish.MenuItem> UnlocksMenuItems
         {
             get
