@@ -1,14 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<RootNamespace>YariazenCore</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<RootNamespace>PastaPalace</RootNamespace>
 		<LibraryPath>D:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed</LibraryPath>
-		<ModsPath>D:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\Mods</ModsPath>
-		<DependenciesPath>D:\Users\Aidan\source\repos\YariazenMods\PlateUpMods\YariazenCore\Dependencies</DependenciesPath>
+		<BepInExPath>D:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\BepInEx</BepInExPath>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Reference Include="BepInEx">
+			<HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
+		</Reference>
+
+		<Reference Include="KitchenLib">
+			<HintPath>$(BepInExPath)\plugins\KitchenLib-BepInEx.dll</HintPath>
+		</Reference>
+
 		<Reference Include="Kitchen.Common">
 			<HintPath>$(LibraryPath)\Kitchen.Common.dll</HintPath>
 			<Private>false</Private>
@@ -84,19 +91,23 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="UnityEngine">
+			<HintPath>$(LibraryPath)\UnityEngine.dll</HintPath>
+		</Reference>
+
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>$(LibraryPath)\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="UnityEngine.AssetBundleModule">
+			<HintPath>$(LibraryPath)\UnityEngine.AssetBundleModule.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 
 		<Reference Include="Sirenix.Serialization">
 			<HintPath>$(LibraryPath)\Sirenix.Serialization.dll</HintPath>
 			<Private>false</Private>
-		</Reference>
-
-		<Reference Include="HarmonyLib">
-			<HintPath>$(DependenciesPath)\0Harmony.dll</HintPath>
-			<Private>true</Private>
 		</Reference>
 	</ItemGroup>
 </Project>

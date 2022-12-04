@@ -1,48 +1,31 @@
 ﻿using HarmonyLib;
-using KitchenData;
-using YariazenCore.Framework;
-using KitchenLib.Customs;
-using YariazenCore.Framework.Events;
 using Kitchen;
+using KitchenMods;
+using UnityEngine;
+using YariazenCore.Framework;
+
 namespace YariazenCore
 {
-    public class Mod : YariazenMod
+    public class Mod : GenericSystemBase, IModSystem
     {
-        public CustomAppliance d;
-        public int CreativeTerminalID;
-        public static GameData gamedata;
+        internal const string MOD_NAME = "YariazenCore";
+        internal const string MOD_VERSION = "0.0.0";
 
-        public Mod() : base("Yariazen.YariazenCore", ">=1.0.0", new[] { "KitchenLib" })
+        public Mod()
         {
-            YariazenPatch.Initialize(Log, Error);
-            YariazenUtility.Initialize(Log, Error);
-            YariazenEvents.GameDataConstructor += OnGameDataConstructor;
+            Debug.Log($"{MOD_NAME} {MOD_VERSION}: Loaded");
+
+            Paths.Initialize();
+
+            Harmony harmony = new Harmony(MOD_NAME);
         }
 
-        public override void OnApplicationStart()
+        protected override void Initialise()
         {
-            base.OnApplicationStart();
-
-            HarmonyLib.Harmony harmony = this.HarmonyInstance;
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(GameDataConstructor), "BuildGameData"),
-                postfix:
-                    new HarmonyMethod(
-                        typeof(YariazenPatch).GetMethod(nameof(YariazenPatch.Postfix_GameDataConstructor_BuildGameData)),
-                        priority: HarmonyLib.Priority.First)
-            );
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(ProvideStartingEnvelopes), "OnUpdate"),
-                postfix: new HarmonyMethod(typeof(YariazenPatch), nameof(YariazenPatch.Postfix_ProvideStartingEnvelopes_OnUpdate))
-            );
+            base.Initialise();
+            
         }
 
-        private void OnGameDataConstructor(object sender, GameDataConstructorEventArgs e)
-        {
-            gamedata = e.gamedata;
-            d = AddAppliance<CreativeTerminal>();
-        }
+        protected override void OnUpdate() { }
     }
 }
