@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net472</TargetFramework>
@@ -10,6 +10,10 @@
 	<ItemGroup>
 		<Reference Include="BepInEx">
 			<HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
+		</Reference>
+
+		<Reference Include="HarmonyLib">
+			<HintPath>$(BepInExPath)\core\0Harmony.dll</HintPath>
 		</Reference>
 
 		<Reference Include="KitchenLib">
@@ -86,6 +90,11 @@
 			<Private>false</Private>
 		</Reference>
 
+		<Reference Include="Unity.TextMeshPro">
+			<HintPath>$(LibraryPath)\Unity.TextMeshPro.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
 		<Reference Include="Unity.Entities">
 			<HintPath>$(LibraryPath)\Unity.Entities.dll</HintPath>
 			<Private>false</Private>
@@ -97,6 +106,16 @@
 
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>$(LibraryPath)\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath>$(LibraryPath)\UnityEngine.InputLegacyModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(LibraryPath)\UnityEngine.UI.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 

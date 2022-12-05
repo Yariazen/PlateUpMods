@@ -2,7 +2,7 @@
 using KitchenLib;
 using KitchenLib.Customs;
 using KitchenLib.Reference;
-using PastaPalace.Customs;
+using PastaPalace.Framework.Customs;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
@@ -33,7 +33,8 @@ namespace PastaPalace
 
         void Awake()
         {
-            //RawNoodles = AddGameDataObject<RawNoodles>();
+            //Pastas
+            RawNoodles = AddGameDataObject<RawNoodles>();
         }
     }
 }

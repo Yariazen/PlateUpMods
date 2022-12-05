@@ -4,7 +4,7 @@ using KitchenLib.Utils;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PastaPalace.Customs
+namespace PastaPalace.Framework.Customs
 {
     internal class RawNoodles : CustomItemGroup
     {
@@ -15,8 +15,8 @@ namespace PastaPalace.Customs
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-
-        public override List<ItemGroup.ItemSet> DerivedSets
+        
+        public override List<ItemGroup.ItemSet> Sets
         {
             get
             {
@@ -26,12 +26,22 @@ namespace PastaPalace.Customs
                 ingredients.Max = 2;
                 ingredients.Min = 2;
                 ingredients.IsMandatory = true;
-                ingredients.Items.Add((Item)GDOUtils.GetExistingGDO(Mod.FlourID));
-                ingredients.Items.Add((Item)GDOUtils.GetExistingGDO(Mod.EggCrackedID));
+                List<Item> items = new List<Item>
+                {
+                    (Item)GDOUtils.GetExistingGDO(Mod.FlourID),
+                    (Item)GDOUtils.GetExistingGDO(Mod.EggCrackedID)
+                };
+                ingredients.Items = items;
 
                 derivedSets.Add(ingredients);
                 return derivedSets;
             }
+        }
+
+        public override void OnRegister(GameDataObject gameDataObject)
+        {
+            Material[] materials = { MaterialUtils.GetExistingMaterial("Bread - Inside") };
+            MaterialUtils.ApplyMaterial(Prefab, "pasta.blend", materials);
         }
     }
 }
