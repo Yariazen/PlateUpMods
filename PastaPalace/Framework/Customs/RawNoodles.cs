@@ -15,7 +15,7 @@ namespace PastaPalace.Framework.Customs
         public override ItemCategory ItemCategory => ItemCategory.Generic;
 
         public override ItemStorage ItemStorageFlags => ItemStorage.StackableFood;
-        
+
         public override List<ItemGroup.ItemSet> Sets
         {
             get
