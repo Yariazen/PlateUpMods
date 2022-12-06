@@ -1,3 +1,6 @@
 [submodule "KitchenLib"]
 	path = KitchenLib
 	url = https://github.com/Yariazen/KitchenLib
+[submodule "PastaPalace"]
+	path = PastaPalace
+	url = https://github.com/Yariazen/PastaPalace
