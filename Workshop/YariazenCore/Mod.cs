@@ -15,15 +15,12 @@ namespace YariazenCore
         {
             Debug.Log($"{MOD_NAME} {MOD_VERSION}: Loaded");
 
-            Paths.Initialize();
-
             Harmony harmony = new Harmony(MOD_NAME);
         }
 
         protected override void Initialise()
         {
             base.Initialise();
-            
         }
 
         protected override void OnUpdate() { }

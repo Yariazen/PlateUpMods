@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net472</TargetFramework>
-		<RootNamespace>PastaPalace</RootNamespace>
+		<RootNamespace>YariazenCore</RootNamespace>
 		<WorkshopPath>D:\Program Files (x86)\Steam\steamapps\workshop\content\1599600</WorkshopPath>
 		<PlateUpPath>D:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed</PlateUpPath>
 	</PropertyGroup>
@@ -68,12 +68,5 @@
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath>$(PlateUpPath)\UnityEngine.CoreModule.dll</HintPath>
 		</Reference>
-		<Reference Include="UnityEngine.AssetBundleModule">
-			<HintPath>$(PlateUpPath)\UnityEngine.AssetBundleModule.dll</HintPath>
-		</Reference>
-		<Reference Include="Sirenix.Serialization">
-			<HintPath>$(PlateUpPath)\Sirenix.Serialization.dll</HintPath>
-		</Reference>
 	</ItemGroup>
-
 </Project>
