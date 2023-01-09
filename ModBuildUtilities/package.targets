@@ -1,0 +1,87 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<!-- find game path -->
+	<Choose>
+		<When Condition="$(OS) == 'Unix'">
+			<PropertyGroup>
+				<!-- Linux -->
+				<GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.steam/steam/steamapps/common/PlateUp/PlateUp</GamePath>
+				<GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.local/share/Steam/steamapps/common/PlateUp/PlateUp</GamePath>
+				<GamePath Condition="!Exists('$(GamePath)')">$(HOME)/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/common/PlateUp/PlateUp</GamePath>
+			</PropertyGroup>
+		</When>
+		<When Condition="$(OS) == 'Windows_NT'">
+			<PropertyGroup>
+				<!-- registry paths -->
+				<GamePath Condition="!Exists('$(GamePath)')">$([System.IO.Path]::Combine($([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1599600', 'InstallLocation', null, RegistryView.Registry64, RegistryView.Registry32)), "PlateUp"))</GamePath>
+
+				<!-- derive from Steam library path -->
+				<_SteamLibraryPath>$([MSBuild]::GetRegistryValueFromView('HKEY_CURRENT_USER\SOFTWARE\Valve\Steam', 'SteamPath', null, RegistryView.Registry32))</_SteamLibraryPath>
+				<GamePath Condition="!Exists('$(GamePath)') AND '$(_SteamLibraryPath)' != ''">$(_SteamLibraryPath)/steamapps/common/PlateUp/PlateUp</GamePath>
+
+				<!-- Steam paths -->
+				<GamePath Condition="!Exists('$(GamePath)')">C:\Program Files\Steam\steamapps\common\PlateUp\PlateUp</GamePath>
+				<GamePath Condition="!Exists('$(GamePath)')">C:\Program Files (x86)\Steam\steamapps\common\PlateUp\PlateUp</GamePath>
+			</PropertyGroup>
+		</When>
+	</Choose>
+
+	<PropertyGroup>
+		<DebugSymbols>true</DebugSymbols>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+
+		<WorkshopPath Condition="'$(WorkshopPath)' == ''">$([System.IO.Path]::GetDirectoryName($([System.IO.Path]::GetDirectoryName($([System.IO.Path]::GetDirectoryName($(GamePath)))))))\workshop\content\1599600</WorkshopPath>
+		<AssemblyReferencePath Condition="'$(AssemblyReferencePath)' == ''">$([System.IO.Path]::Combine($(GamePath), 'PlateUp_Data', 'Managed'))</AssemblyReferencePath>
+		<GameModsPath Condition="'$(GameModsPath)' == ''">$([System.IO.Path]::Combine($(GamePath), 'Mods'))</GameModsPath>
+		<AssetBundlePath Condition="'$(AssetBundlePath)' == ''">$([System.IO.Path]::Combine($(USERPROFILE), 'My Project', 'Assets', 'AssetBundles', $([System.String]::ToLower('$(MSBuildProjectName)'))))</AssetBundlePath>
+		
+		<EnableModDeployLocal Condition="'$(EnableModDeployLocal)' == ''">true</EnableModDeployLocal>
+		<EnableGameDebugging Condition="'$(EnableGameDebugging)' == ''">true</EnableGameDebugging>
+		<EnableCopyLocal Condition="'$(EnableCopyLocal)' == ''">false</EnableCopyLocal>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT' AND '$(EnableGameDebugging)' == 'true'">
+		<StartAction>Program</StartAction>
+		<StartProgram>$(GamePath)\PlateUp.exe</StartProgram>
+		<StartWorkingDirectory>$(GamePath)</StartWorkingDirectory>
+	</PropertyGroup>
+
+	<Target Name="ValidateGamePath" AfterTargets="BeforeBuild">
+		<Error Condition="!Exists('$(GamePath)')" Text="The mod build package can't find your game folder. You can specify where to find it" ContinueOnError="false" />
+	</Target>
+
+	<ItemGroup Condition="'$(GamePath)' != '' AND '$(EnableCopyLocal)'">
+		<Reference Include="$(AssemblyReferencePath)\Kitchen*.dll" Private="true" />
+		<Reference Include="$(AssemblyReferencePath)\Unity*.dll" Private="true" />
+		<Reference Include="$(AssemblyReferencePath)\Newtonsoft.Json.dll" Private="true" />
+		<Reference Include="$(AssemblyReferencePath)\Controllers.dll" Private="true" />
+		<Reference Include="$(AssemblyReferencePath)\Sirenix.Serialization.dll" Private="true" />
+		<Reference Include="$(AssemblyReferencePath)\XNode.dll" Private="true" />
+		<Reference Include="$(WorkshopPath)\**\*.dll" Private="true" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(GamePath)' != '' AND '!$(EnableCopyLocal)'">
+		<Reference Include="$(AssemblyReferencePath)\Kitchen*.dll" Private="false" />
+		<Reference Include="$(AssemblyReferencePath)\Unity*.dll" Private="false" />
+		<Reference Include="$(AssemblyReferencePath)\Newtonsoft.Json.dll" Private="false" />
+		<Reference Include="$(AssemblyReferencePath)\Controllers.dll" Private="false" />
+		<Reference Include="$(AssemblyReferencePath)\Sirenix.Serialization.dll" Private="false" />
+		<Reference Include="$(AssemblyReferencePath)\XNode.dll" Private="false" />
+		<Reference Include="$(WorkshopPath)\**\*.dll" Private="false" />
+	</ItemGroup>
+		
+	<Target Name="Deploy" AfterTargets="Build" Condition="$(EnableModDeployLocal) == 'true'">
+		<Message Text="Running DeployPack target..." />
+		<ItemGroup>
+			<_FilesToCopy Include="$(ProjectDir)/bin/$(Configuration)/$(TargetFramework)/$(AssemblyName).dll" />
+		</ItemGroup>
+		<Copy SourceFiles="@(_FilesToCopy)" DestinationFiles="@(_FilesToCopy->'$(GameModsPath)\$(MSBuildProjectName)\content\%(RecursiveDir)%(Filename)%(Extension)')" />
+		
+		<Copy Condition="'$(AssetBundlePath)' != ''" SourceFiles="$(AssetBundlePath)" DestinationFiles="$(GameModsPath)\$(MSBuildProjectName)\content\$([System.String]::ToLower('$(MSBuildProjectName)')).assets" />
+	</Target>
+
+	<Target Name="TestMessage" AfterTargets="Build" >
+		<Message Text="***********************************************************" Importance="high"/>
+		<Message Text="$(MSBuildThisFileDirectory)" Importance="high"/>
+		<Message Text="***********************************************************" Importance="high"/>
+	</Target>
+</Project>

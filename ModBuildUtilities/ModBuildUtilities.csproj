@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<!--Build-->
+		<RootNamespace>ModBuildUtilities</RootNamespace>
+		<TargetFramework>net472</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+		<ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+		
+		<!--NuGet Package-->
+		<PackageId>Yariazen.PlateUp.ModBuildUtilities</PackageId>
+		<Title>Build package for PlateUp mods</Title>
+		<Version>1.5.0</Version>
+		<Authors>Yariazen</Authors>
+		<Description>Automates the build configuration for PlateUp mods as well as some utilities.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None PackagePath="build\Yariazen.PlateUp.ModBuildUtilities.dll" Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" Visible="false" />
+		<None PackagePath="build\Yariazen.PlateUp.ModBuildUtilities.targets" Include="package.targets" Pack="true" Visible="true" />
+	</ItemGroup>
+</Project>
